@@ -23,10 +23,14 @@ add_action('woocommerce_process_product_meta', 'newman_save_product_meta');
 
 add_filter('woocommerce_single_product_image_zoom_enabled', '__return_false');
 add_filter('single_product_archive_thumbnail_size', function ($size) {
-    return 'product-thumbnail'; });
+    return 'product-thumbnail';
+});
 add_filter('single_product_archive_thumbnail_size', function ($size) {
-    return 'product-thumbnail'; });
-add_filter('woocommerce_add_cart_item_data', 'add_shoe_size_to_cart',10,2);
+    return 'product-thumbnail';
+});
+add_filter('woocommerce_add_cart_item_data', 'add_shoe_size_to_cart', 10, 2);
+add_filter('woocommerce_get_item_data', 'show_shoe_size_on_cart', 10, 2);
+add_action( 'woocommerce_checkout_create_order_line_item', 'shoe_size_line_item_meta',10,4 );
 
 function data_fetch()
 {
@@ -37,9 +41,9 @@ function data_fetch()
 
     $the_query = new WP_Query(
         array(
-            'posts_per_page' => 5,
-            's' => esc_attr($_POST['keyword']),
-            'post_type' => 'product'
+            'posts_per_page'    => 5,
+            's'                 => esc_attr($_POST['keyword']),
+            'post_type'         => 'product'
         )
     );
 
@@ -91,10 +95,10 @@ function newman_add_shoe_sizes()
      */
     woocommerce_wp_text_input(
         array(
-            'id' => 'newman_shoe_size',
-            'label' => __('Shoe Size, separated by , Eg 41,42', 'woocommerce'),
-            'placeholder' => 'Enter available shoe sizes',
-            'desc_tip' => 'true'
+            'id'            => 'newman_shoe_size',
+            'label'         => __('Shoe Size, separated by , Eg 41,42', 'woocommerce'),
+            'placeholder'   => 'Enter available shoe sizes',
+            'desc_tip'      => 'true'
         )
     );
 }
@@ -114,9 +118,9 @@ function newman_save_product_meta($postid)
 
 function newman_checkout_btn()
 {
-    $this_product_id = get_the_id();
-    $this_product = wc_get_product($this_product_id);
-    $checkout_url = wc_get_checkout_url();
+    $this_product_id    = get_the_id();
+    $this_product       = wc_get_product($this_product_id);
+    $checkout_url       = wc_get_checkout_url();
 
     if (is_singular() && $this_product->get_type() == 'simple') {
         echo '<a class="btn w-100 rounded-0 border-0 btn-checkout" href="' . $checkout_url . '?add-to-cart=' . $this_product_id . '">Buy it now</a>';
@@ -125,12 +129,15 @@ function newman_checkout_btn()
 
 function newman_add_shoe_size()
 {
-    $this_product_id = get_the_id();
-    $size_meta = get_post_meta($this_product_id, 'newman_shoe_size', true);
-    $sizes = explode(',', $size_meta);
+    $this_product_id    = get_the_id();
+    $size_meta          = get_post_meta($this_product_id, 'newman_shoe_size', true);
+    $sizes              = explode(',', $size_meta);
 
     if (sizeof($sizes) > 1):
-        echo '<div><span>Available sizes:</span><input type="hidden" name="newman_shoe_size"><ul class="d-flex size-list">';
+        echo '<div>';
+        echo '<span>Available sizes:</span>';
+        echo '<input type="hidden" name="newman_shoe_size">';
+        echo '<ul class="d-flex size-list">';
         foreach ($sizes as $key => $size):
             echo '<li data-size="' . $size . '">' . $size . '</li>';
         endforeach;
@@ -138,6 +145,38 @@ function newman_add_shoe_size()
     endif;
 }
 
-function add_shoe_size_to_cart($cart_item_data, $product_id){
-    var_dump($cart_item_data);
+function add_shoe_size_to_cart($cart_item_data, $product_id)
+{
+    /**
+     * Add shoe size to cart. 
+     * @param   [type] $cart_item_data, $product_id
+     * @return  $cart_item_data
+     */
+    if (isset($_REQUEST['newman_shoe_size'])):
+        $cart_item_data['newman_shoe_size'] = sanitize_text_field($_REQUEST['newman_shoe_size']);
+    endif;
+
+    return $cart_item_data;
+}
+
+function show_shoe_size_on_cart($item_data, $cart_item)
+{
+
+    if (array_key_exists('newman_shoe_size', $cart_item)):
+        $shoe_size_details = $cart_item['newman_shoe_size'];
+
+        $item_data[] = array(
+            'key'   => 'Selected shoe size',
+            'value' => $shoe_size_details
+        );
+    endif;
+
+    return $item_data;
+}
+
+function shoe_size_line_item_meta($item, $cart_item_key, $values, $order){
+
+    if(array_key_exists('newman_shoe_size', $values)):
+        $item->add_meta_data('Preferred shoe size',$values['newman_shoe_size']);
+    endif;
 }

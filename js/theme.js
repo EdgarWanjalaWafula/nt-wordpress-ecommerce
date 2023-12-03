@@ -11,6 +11,7 @@ jQuery(document).ready(function ($) {
     miscScripts()
     slidingPanels()
     productSearch()
+    singleProductScripts()
 
     function miscScripts() {
         $(".parralax-window").parallax({ speed: .3 })
@@ -35,8 +36,7 @@ jQuery(document).ready(function ($) {
     function productSearch() {
         /**
          * Search for products from product post type. Pass the action parameter to inc/woocommerce-hooks function to fetch and display the data. 
-         * @param data_fetch
-         * @param 
+         * 
          */
         let searchInpt = $("input[name='product-search']"),
             searchRes = $(".search-results")
@@ -55,6 +55,18 @@ jQuery(document).ready(function ($) {
                 });
             }
 
+        })
+    }
+
+    function singleProductScripts(){
+        let a = $('input[name="newman_shoe_size"]'), 
+            b = $(".single_add_to_cart_button"), 
+            c = $(".size-list li")
+            console.log(c)
+
+        $(c).on('click', function(){
+            $(this).addClass("selected")
+            $(a).attr('value', (this.dataset['size']))
         })
     }
 });

@@ -19,7 +19,6 @@ defined( 'ABSPATH' ) || exit;
 ?>
 
 <div class="woocommerce-order">
-	<div class="container">
 		<div class="row">
 			<?php if ( $order ) :
 
@@ -86,5 +85,4 @@ defined( 'ABSPATH' ) || exit;
 			<?php endif; ?>
 			</div>
 		</div>
-	</div>
 </div>
