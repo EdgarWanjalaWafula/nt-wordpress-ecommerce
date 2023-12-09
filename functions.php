@@ -54,6 +54,7 @@ function newman_tactical_setup() {
 		array(
 			'menu-1' => esc_html__( 'Primary', 'newman-tactical' ),
 			'menu-2' => esc_html__( 'Footer Menu', 'newman-tactical' ),
+			'menu-3' => esc_html__( 'Policies Menu', 'newman-tactical' ),
 		)
 	);
 
@@ -143,11 +144,9 @@ add_action( 'widgets_init', 'newman_tactical_widgets_init' );
  */
 function newman_tactical_scripts() {
 	wp_enqueue_style( 'newman-tactical-aos', '//cdnjs.cloudflare.com/ajax/libs/aos/2.3.4/aos.css', array(), _S_VERSION );
-	wp_enqueue_style( 'newman-tactical-animate', '//cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css', array(), _S_VERSION );
-	// wp_enqueue_style( 'newman-tactical-bs-icons', '//fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200', array(), _S_VERSION );
 	wp_enqueue_style( 'newman-tactical-bs', '//cdnjs.cloudflare.com/ajax/libs/bootstrap/5.2.0-beta1/css/bootstrap.min.css', array(), _S_VERSION );
 	wp_enqueue_style( 'newman-tactical-font-body', '//fonts.googleapis.com/css2?family=Questrial&display=swap', array(), _S_VERSION );
-	wp_enqueue_style( 'newman-tactical-font-heading', get_template_directory_uri() . '/fonts/fonts.css', array(), _S_VERSION );
+	wp_enqueue_style( 'newman-tactical-font-icons', '//cdn.jsdelivr.net/npm/bootstrap-icons@1.11.2/font/bootstrap-icons.min.css', array(), _S_VERSION );
 	wp_enqueue_style( 'newman-tactical-style', get_stylesheet_uri(), array(), _S_VERSION );
 	wp_style_add_data( 'newman-tactical-style', 'rtl', 'replace' );
 

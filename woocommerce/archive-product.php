@@ -76,7 +76,7 @@ tune
 	<div class="product-loop">
 		<div class="container-fluid">
 			<div class="row">
-				<div class="col">
+				<div class="col p-0">
 					<?php
 						if ( woocommerce_product_loop() ) {
 

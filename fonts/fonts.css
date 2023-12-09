@@ -1,11 +1,4 @@
 @font-face {
-    font-family: 'Traffic';
-    src: url(./traffic.ttf);
-    font-display: swap;
-    font-style: normal;
-}
-
-@font-face {
     font-family: 'Introrust';
     src: url(./introrustg-base2line.otf);
     font-display: swap;
@@ -14,7 +7,7 @@
 
 @font-face {
     font-family: 'Helvetica';
-    src: url(./Helvetica.ttf);
+    src: url(./Helvetica-Bold.ttf);
     font-display: swap;
     font-style: normal;
 }

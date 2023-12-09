@@ -15,15 +15,21 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6 offset-3">
-					<img class="d-block" src="<?php echo wp_get_attachment_image_url('21', 'full'); ?>" alt="">
+					<img class="d-block mx-auto" src="<?php echo wp_get_attachment_image_url('21', 'full'); ?>" alt="">
 					<nav>
 						<?php
 							wp_nav_menu(array(
-								'menu_id' 		=> 'menu-2', 
-								'menu_class'	=> 'd-flex justify-content-center flex-wrap text-capitalize'
+								'theme_location' 	=> 'menu-2', 
+								'menu_class'		=> 'd-flex justify-content-center flex-wrap text-capitalize'
 							));
 						?>
 					</nav>
+					<ul class="social-icons d-flex justify-content-between mx-auto">
+						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/facebook.png" alt=""></a></li>
+						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/twitter.png" alt=""></a></li>
+						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/instagram.png" alt=""></a></li>
+						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/tik-tok.png" alt=""></a></li>
+					</ul>
 				</div>
 			</div>
 		</div>
@@ -34,8 +40,17 @@
 				<div class="col">
 					<span>&copy; <?php echo date('Y'); ?> Newman Tacticals. All rights reserved.</span>
 				</div>
+				<div class="col-3">
+					<?php
+						wp_nav_menu(array(
+							'theme_location'=> 'menu-3', 
+							'menu_id'		=> 'policies-menu',
+							'menu_class'	=> 'd-flex text-capitalize justify-content-around text-dark'
+						));
+					?>
+				</div>
 				<div class="col text-end">
-					<span>Built by <a href="https://edgarwanjala.co.ke">Edgar</a></span>
+					<span>Built by <a target="_blank" href="https://edgarwanjala.co.ke">Edgar</a></span>
 				</div>
 			</div>
 		</div>

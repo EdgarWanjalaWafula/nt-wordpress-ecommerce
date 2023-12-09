@@ -1,10 +1,10 @@
-<div id="mobile-menu" class="fixed-menu-panel position-fixed h-100 w-100">  
+<div id="mobile-menu" class="fixed-menu-panel position-fixed h-100">  
     <div>
     <div class="d-flex align-items-center justify-content-between">
-        <div class="menu-search">
-            <input class="form-control" type="text" name="" id="" placeholder="Search for products..">
-        </div>
-        <span class="material-symbols-sharp close-panel">close</span>
+<?php 
+    the_custom_logo();
+?>
+        <i data-target="mobile-menu" class="bi bi-x-lg panel-close"></i>
     </div>
     
     <div class="mobile-panel-links">
@@ -27,7 +27,7 @@
                             ?>
                                 <div data-animation-offset="<?php echo $key+1; ?>" class="position-relative shop-menu-category">
                                     <a class="d-block text-white" href="<?php echo get_term_link($term); ?>">
-                                    <img class="position-absolute w-100 h-100 theme-obj-fit" src="<?php echo $cat_img; ?>" alt="Newman Tacticals">
+                                    <img class="position-absolute w-100 h-100 theme-obj-fit theme-border-radius" src="<?php echo $cat_img; ?>" alt="Newman Tacticals">
                                         <h4 class="heading position-relative higher-z-index  m-0"><?php echo $term->name; ?></h4>
                                     </a>
                                 </div>

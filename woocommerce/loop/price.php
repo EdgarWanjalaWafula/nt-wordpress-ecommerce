@@ -20,8 +20,19 @@ if ( ! defined( 'ABSPATH' ) ) {
 }
 
 global $product;
+$this_product_id    = $product->id;
+$size_meta          = get_post_meta($this_product_id, 'newman_shoe_size', true);
+$sizes              = explode(',', $size_meta);
 ?>
 
 <?php if ( $price_html = $product->get_price_html() ) : ?>
-	<span class="price"><?php echo $price_html; ?></span>
+	<div class="d-flex justify-content-between align-items-center">
+		<span class="price"><?php echo $price_html; ?></span>
+
+		<?php 
+			if(count($sizes) > 1):
+				echo '<span class="small size-after-price">'.count($sizes).' sizes</span>';
+			endif;
+		?>
+	</div>
 <?php endif; ?>

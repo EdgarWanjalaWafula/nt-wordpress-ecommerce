@@ -22,12 +22,7 @@ get_header();
 
 		while (have_posts()):
 			the_post();
-			if(is_page('home')):
-				get_template_part('pages/page', $post_slug);
-			else:
-				get_template_part( 'template-parts/content', 'page' );
-			endif;
-			
+			get_template_part( 'template-parts/content', 'page' );			
 		endwhile; // End of the loop.
 	?>
 </main><!-- #main -->

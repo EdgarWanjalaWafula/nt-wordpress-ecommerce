@@ -24,7 +24,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 	return;
 }
 ?>
-<li <?php wc_product_class( 'col-lg-3', $product ); ?>>
+<li <?php wc_product_class( 'col-lg-3 col-md-4 col-6', $product ); ?>>
 
 	<div class="product-card">
 		<div class="product-thumbnail-cart position-relative">
@@ -45,7 +45,7 @@ if ( empty( $product ) || ! $product->is_visible() ) {
 				do_action( 'woocommerce_before_shop_loop_item_title' );
 			?>
 		</div>
-		<div class="product-title-price text-center">
+		<div class="product-title-price">
 			<?php 
 				/**
 				 * Hook: woocommerce_shop_loop_item_title.

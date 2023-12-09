@@ -35,8 +35,8 @@
                     <div class="featured-products">
                         <div class="row">
                             <div class="col-md-8 offset-2 text-center">
-                                <span class="products-featured text-center d-block">Featured products</span>
-                                <h1 class="section-heading">Choose your weapon. Shop now</h1>
+                                <span class="products-featured text-center d-block section-tag text-uppercase">Featured products</span>
+                                <h1 class="section-heading"><?php echo esc_html('Choose your weapon. Shop now'); ?></h1>
                             </div>
                             <?php echo do_shortcode('[products limit="4" columns="2" visibility="featured"]'); ?>
                         </div>
@@ -58,7 +58,7 @@
                             <div class="about-us-box">
                                 <h1 class="section-heading"><?php echo esc_html($about_heading); ?></h1>
                                 <p><?php echo esc_html($about_verbiage); ?></p>
-                                <a href="<?php echo esc_html(home_url('about')); ?>">Discover more</a>
+                                <a class="theme-button" href="<?php echo esc_html(home_url('about')); ?>">Discover more</a>
                             </div>
                         </div>
                     </div>
@@ -94,7 +94,7 @@
                             <div class="banner-content position-absolute">
                                 <h2 class="section-heading text-dark"><?php echo esc_html($heading); ?></h2>
                                 <p><?php echo esc_html($content); ?></p>
-                                <button class="btn">Order today</button>
+                                <button class="btn theme-button">Order today</button>
                             </div>
                             <?php
 

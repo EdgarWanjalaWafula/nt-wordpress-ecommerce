@@ -1,10 +1,11 @@
-<div class="search-panel position-fixed h-100" id="search-panel">
-    <div>
-    <h2>Search for products..</h2>
-    <div class="d-flex align-items-center searchbox-container">
-        <span class="material-symbols-outlined">search</span>
-        <input type="search" name="product-search" class="form-control rounded-0 border-0 heading text-uppercase" placeholder="Search our store">
+<div class="search-panel position-fixed" id="search-panel">
+    <div class="d-flex align-items-center searchbox-container justify-content-between">
+        <div class="searchbox-with-border w-100 d-flex align-items-center">
+            <input type="search" name="product-search" class="form-control p-0 rounded-0 bg-transparent border-0 heading"
+                placeholder="Search for products..">
+            <i data-target="search-panel" class="bi bi-x-lg panel-close"></i>
+        </div>
     </div>
+    <div class="search-progress"></div>
     <div class="search-results"></div>
-    </div>
 </div>
