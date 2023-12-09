@@ -54,11 +54,14 @@
             <section class="about-newman position-relative parralax-window" data-parallax="scroll" data-image-src="<?php echo esc_attr($about_bg); ?>">
                 <div class="container">
                     <div class="row justify-content-end">
-                        <div class="col-md-5">
+                        <div class="col-md-5 text-white">
                             <div class="about-us-box">
                                 <h1 class="section-heading"><?php echo esc_html($about_heading); ?></h1>
-                                <p><?php echo esc_html($about_verbiage); ?></p>
-                                <a class="theme-button" href="<?php echo esc_html(home_url('about')); ?>">Discover more</a>
+                                <div class="text-white"><?php echo $about_verbiage; ?></div>
+                                <div>
+                                    <a class="theme-button text-white" href="<?php echo esc_html(home_url('about')); ?>">Discover more</a>
+                                    <a class="theme-button text-white border-0" href="<?php echo esc_html(home_url('contact')); ?>">Contact Us</a>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -92,7 +95,7 @@
                     <div class="container-fluid">
                         <a href="" class="row">
                             <div class="banner-content position-absolute">
-                                <h2 class="section-heading text-dark"><?php echo esc_html($heading); ?></h2>
+                                <h2 class="section-heading"><?php echo esc_html($heading); ?></h2>
                                 <p><?php echo esc_html($content); ?></p>
                                 <button class="btn theme-button">Order today</button>
                             </div>

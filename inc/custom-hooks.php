@@ -50,7 +50,7 @@ function data_fetch()
     if ($the_query->have_posts()):
         ?>
         <div class="row">
-            <span class="heading found-posts d-block small">We found
+            <span class="heading found-posts d-block small text-center">We found
                 <?php echo $the_query->found_posts; ?> results
             </span>
             <?php
@@ -59,12 +59,12 @@ function data_fetch()
                 get_template_part('template-parts/content', 'search-result');
             endwhile;
 
-            if ($the_query->found_posts > 2):
+            if ($the_query->found_posts > 4):
                 echo "</div></div><div><a href='" . home_url() . "?s=" . esc_attr($_POST['keyword']) . "' class='bg-dark text-white theme-button heading mx-auto d-block more-results'>view more</a>";
             endif;
             wp_reset_postdata();
     else:
-        echo '<h3>No Results Found</h3>';
+        echo '<div class="alert alert-danger mt-4">No result found.</div>';
     endif;
 
     die();

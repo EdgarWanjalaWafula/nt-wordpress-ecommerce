@@ -152,6 +152,7 @@ function newman_tactical_scripts() {
 
 	wp_enqueue_script( 'newman-tactical-navigation', get_template_directory_uri() . '/js/navigation.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'newman-tactical-parallax', get_template_directory_uri() . '/js/parallax.min.js', array(), _S_VERSION, true );
+	wp_enqueue_script( 'newman-tactical-gsap', '//cdnjs.cloudflare.com/ajax/libs/gsap/3.11.4/gsap.min.js', array(), _S_VERSION, true );
 	wp_enqueue_script( 'newman-tactical-theme', get_template_directory_uri() . '/js/theme.js', array(), _S_VERSION, true );
 	if ( is_singular() && comments_open() && get_option( 'thread_comments' ) ) {
 		wp_enqueue_script( 'comment-reply' );

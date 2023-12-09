@@ -25,20 +25,19 @@ jQuery(document).ready(function ($) {
 
         let a = $(".toggle-btn"),
             x = $(".panel-close"),
-            body = $(document.body)
+            body = $(document.body),
+            slidingPanelTL = gsap.timeline({ defaults: { duration: .8, ease: "expo.inOut" } })
 
-        $(document).ready(function () {
-            $(a).on("click", function () {
-                let b = this.dataset['target'],
-                    c = `#${b}`
+        $(a).on("click", function () {
+            let b = this.dataset['target'],
+                c = `#${b}`
 
-                $(body).addClass("show-overlay")
-                $(this)
-                $(c)
-                    .addClass("open")
+            $(body).addClass("show-overlay")
+            $(this)
+            $(c)
+                .addClass("open")
 
-            })
-        });
+        })
 
         $(x).on('click', function () {
             let y = this.dataset['target'],
@@ -56,8 +55,10 @@ jQuery(document).ready(function ($) {
         let searchInpt = $("input[name='product-search']"),
             searchRes = $(".search-results"),
             searchPanel = $(".search-panel"),
-            searchTime, 
-            searchBar = $(".search-progress")
+            searchTime,
+            searchBar = $(".search-progress"),
+            hostName = window.location.protocol + '//' + window.location.hostname + window.location.pathname,
+            searchTl = gsap.timeline({ defaults: { duration: .8, ease: "expo.inOut" } })
 
         $(searchInpt).on("input", function () {
             let searchVal = $(this).val()
@@ -65,30 +66,37 @@ jQuery(document).ready(function ($) {
             if (searchVal.length > 3) {
                 $.ajax({
                     type: "post",
-                    url: 'https://localhost/newman-tactical/wp-admin/admin-ajax.php',
+                    url: `${hostName.toLowerCase()}/wp-admin/admin-ajax.php`,
                     data: { action: 'data_fetch', keyword: searchVal },
                     beforeSend: function () {
                         $(searchRes).html("Fetching..")
                         searchTime = new Date().getTime();
                     },
                     success: function (response) {
-                        $(searchRes).html(response)
-                    },
-                    complete: function () {
-                        $(searchPanel).addClass('show-results')
-                        $(searchBar).css({ "transition-duration": new Date().getTime() - searchTime + 'ms' , 'width': '100%'})
+                        (() => {
+                            searchTl
+                                .to(searchPanel, { height: '50vh' })
+                                .to(searchBar, { transitionDuration: new Date().getTime() - searchTime + 'ms', width: '100%' })
+                                .call(() => {
+                                    $(searchRes).html(response)
+                                })
+                        })()
+                        // setTimeout(() => {
+                        //     $(searchRes).html(response)
+                        // }, (new Date().getTime() - searchTime) / 2);
                     }
+                    // complete: function () {
+                    //     $(searchPanel).addClass('show-results')
+                    //     $(searchBar).css({ "transition-duration": new Date().getTime() - searchTime + 'ms', 'width': '100%' })
+                    // }
                 });
+
+                return
             } else {
                 $(searchRes).html("")
-                $(searchBar).css({ 'width': '0'})
-                if (window.innerWidth < 579) {
-                    $(searchPanel).css({
-                        height: "81px"
-                    })
-                }
+                $(searchBar).css({ 'width': '0' })
+                $(searchPanel).removeClass('show-results')
             }
-
         })
     }
 

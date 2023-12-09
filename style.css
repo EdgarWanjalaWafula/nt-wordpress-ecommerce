@@ -669,6 +669,10 @@ textarea {
 	transform: rotate(90deg);
 }
 
+.heading.found-posts {
+	margin: 24px 0;
+}
+
 .searchbox-container input {
 	font-size: 1.5rem;
 }
@@ -678,16 +682,12 @@ textarea {
 	width: 0;
 }
 
-.heading.found-posts {
-	margin: 24px;
-}
-
 .search-result:not(:last-child) {
 	margin-bottom: 1rem;
 }
 
 .search-result img {
-	width: 25%;
+	width:33%;
 }
 
 .search-result img+div {
@@ -991,9 +991,16 @@ footer img {
 	padding: 5rem 0;
 }
 
-.about-us-box {
-	padding: 3.5rem;
-	background: #fff;
+.banner-content *, 
+.about-us-box p{
+	color:#ffff;
+}
+
+.banner-content, .about-us-box {
+	padding: 3rem;
+	-webkit-backdrop-filter: blur(1rem);
+	backdrop-filter: blur(1rem);
+	background-color: rgba(255, 255, 255, .01);
 	margin: 5rem 0;
 }
 
@@ -1004,10 +1011,9 @@ footer img {
 	margin: 0px auto;
 	left: 0;
 	right: 0;
-	width: calc(100% / 3);
+	width: calc(100% / 3 + 4rem);
 	text-align: center;
-	background: #fff;
-	padding: 1.5rem;
+	padding:2rem;
 }
 
 .banner-collection {
@@ -1247,6 +1253,7 @@ body::before,
 	appearance: textfield;
 }
 
+.quantity-cart i,
 .searchbox-with-border i,
 .menu-toggle,
 .header-right-icons li span,
@@ -1309,6 +1316,10 @@ a.theme-button.buy-now {
 	border-color: var(--theme-brand-color);
 }
 
+.banner-content .theme-button, .about-us-box .theme-button{
+	border-color:#fff;
+}
+
 /*--------------------------------------------------------------
 # Single Product
 --------------------------------------------------------------*/
@@ -1333,7 +1344,6 @@ a.theme-button.buy-now {
 	margin-right: 10px;
 	cursor: pointer;
 	border-bottom: 2px solid transparent;
-	transition: .6s ease;
 	color: var(--theme-text-color);
 }
 
@@ -1574,6 +1584,7 @@ input[type=number] {
 		padding: 1rem;
 	}
 
+	.product-title-price,
 	.featured-products .woocommerce.columns-2,
 	.single .summary.entry-summary {
 		padding: 0;
@@ -1598,5 +1609,31 @@ input[type=number] {
 
 	.quantity-cart .quantity {
 		width: 50%;
+	}
+
+	.searchbox-with-border {
+		padding: 10px;
+	}
+
+	.search-panel {
+		height:81px;
+	}
+
+	.search-panel.show-results {
+		height: 50vh;
+	}
+
+	.woocommerce-loop-product__title + div {
+		flex-direction: column-reverse;
+		align-items: unset !important;
+	}
+
+	.add_to_cart_button{
+		left:0;
+	}
+
+	.search-results {
+		height: calc(50vh - 81px);
+		overflow: hidden auto;
 	}
 }

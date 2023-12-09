@@ -31,7 +31,7 @@ $sizes              = explode(',', $size_meta);
 
 		<?php 
 			if(count($sizes) > 1):
-				echo '<span class="small size-after-price">'.count($sizes).' sizes</span>';
+				echo '<span class="small size-after-price">'.count($sizes).' available sizes</span>';
 			endif;
 		?>
 	</div>
