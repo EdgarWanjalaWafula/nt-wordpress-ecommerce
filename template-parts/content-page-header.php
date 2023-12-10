@@ -1,5 +1,5 @@
 <div class="page-header position-relative d-flex align-items-center">
-    <div class="container-fluid h-100">
+    <div class="container h-100">
         <div class="row h-100">
             <div class="col-md-12 h-100">
                 <div class="position-relative h-100">
