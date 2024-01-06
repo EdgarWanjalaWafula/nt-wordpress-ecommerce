@@ -54,7 +54,7 @@ $wrapper_classes   	= apply_filters(
 						<img src="<?php echo esc_url($img_src); ?>"
 							class="img-fluid"
 							srcset="<?php echo esc_attr($img_srcset); ?>"
-							sizes="(max-width: 50em) 87vw, 680px" alt="Luxury Leather Africa (LuLea)">
+							sizes="(max-width: 50em) 87vw, 680px" alt="Newman Tacticals">
 					<?php
 				}
 			}

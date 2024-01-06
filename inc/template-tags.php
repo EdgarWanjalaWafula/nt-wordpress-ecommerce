@@ -174,7 +174,7 @@ if(!function_exists( 'newman_theme_img')):
 				<img src="<?php echo esc_url($img_src); ?>"
 					class="<?php echo esc_attr($class); ?>"
 					srcset="<?php echo esc_attr($img_srcset); ?>"
-					sizes="(max-width: 50em) 87vw, 680px" alt="Luxury Leather Africa (LuLea)">
+					sizes="(max-width: 50em) 87vw, 680px" alt="Newman Tactical">
 			<?php
 		else: 
 			?>

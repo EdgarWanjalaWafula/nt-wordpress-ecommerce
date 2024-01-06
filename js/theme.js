@@ -15,6 +15,54 @@ jQuery(document).ready(function ($) {
 
     function miscScripts() {
         $(".parralax-window").parallax({ speed: .3 })
+
+        // let modalWindow = $("#offer-modal")
+        // if (modalWindow.length > 0) {
+        //     const myModal = new bootstrap.Modal(modalWindow, {
+        //         keyboard: false
+        //     })
+
+        //     setTimeout(() => {
+        //         myModal.show(myModal)
+        //     }, 1800);
+        // }
+
+        if ($('.theme-carousel').length) {
+            $('.theme-carousel').owlCarousel({
+                loop:true,
+                animateOut: 'fadeOut',
+                autoplay:true,
+                margin:10,
+                dots:false,
+                nav:false,
+                responsive:{
+                    0:{
+                        items:1
+                    },
+                    600:{
+                        items:1
+                    },
+                    1000:{
+                        items:1
+                    }
+                }
+            })
+        }
+
+        // $("#newman-bike-reel").YTPlayer({
+        //     optimizeDisplay:false,
+        //     showControls:false,
+        //     videoURL:'https://youtu.be/1R-avBbNLIo',
+        //     containment:'.video-bg',
+        //     autoPlay:true,
+        //     mute:true,
+        //     startAt:0,
+        //     showYTLogo: false, 
+        //     opacity:1,
+        //     onReady: function () {
+        //         $('body').addClass('video-ready')
+        //     }
+        // }); // Load Youtube Player 
     }
 
     function slidingPanels() {
@@ -49,7 +97,7 @@ jQuery(document).ready(function ($) {
 
     function productSearch() {
         /**
-         * Search for products from product post type. Pass the action parameter to inc/woocommerce-hooks function to fetch and display the data. 
+         * Search for products from product post type. Pass the action parameter to inc/woocommerce-hooks function to fetch and display the data. Localized 
          * 
          */
         let searchInpt = $("input[name='product-search']"),
@@ -57,7 +105,7 @@ jQuery(document).ready(function ($) {
             searchPanel = $(".search-panel"),
             searchTime,
             searchBar = $(".search-progress"),
-            hostName = window.location.protocol + '//' + window.location.hostname + window.location.pathname,
+            wpAjaxURL = localized_objects['wp-ajax-url'], 
             searchTl = gsap.timeline({ defaults: { duration: .8, ease: "expo.inOut" } })
 
         $(searchInpt).on("input", function () {
@@ -66,29 +114,29 @@ jQuery(document).ready(function ($) {
             if (searchVal.length > 3) {
                 $.ajax({
                     type: "post",
-                    url: `${hostName.toLowerCase()}/wp-admin/admin-ajax.php`,
+                    url: wpAjaxURL,
                     data: { action: 'data_fetch', keyword: searchVal },
                     beforeSend: function () {
                         $(searchRes).html("Fetching..")
                         searchTime = new Date().getTime();
                     },
                     success: function (response) {
-                        (() => {
-                            searchTl
-                                .to(searchPanel, { height: '50vh' })
-                                .to(searchBar, { transitionDuration: new Date().getTime() - searchTime + 'ms', width: '100%' })
-                                .call(() => {
-                                    $(searchRes).html(response)
-                                })
-                        })()
-                        // setTimeout(() => {
-                        //     $(searchRes).html(response)
-                        // }, (new Date().getTime() - searchTime) / 2);
+                        // (() => {
+                        //     searchTl
+                        //         .to(searchPanel, { height: '50vh' })
+                        //         .to(searchBar, { transitionDuration: new Date().getTime() - searchTime + 'ms', width: '100%' })
+                        //         .call(() => {
+                        //             $(searchRes).html(response)
+                        //         })
+                        // })()
+                        setTimeout(() => {
+                            $(searchRes).html(response)
+                        }, (new Date().getTime() - searchTime) / 2);
+                    },
+                    complete: function () {
+                        $(searchPanel).addClass('show-results')
+                        $(searchBar).css({ "transition-duration": new Date().getTime() - searchTime + 'ms', 'width': '100%' })
                     }
-                    // complete: function () {
-                    //     $(searchPanel).addClass('show-results')
-                    //     $(searchBar).css({ "transition-duration": new Date().getTime() - searchTime + 'ms', 'width': '100%' })
-                    // }
                 });
 
                 return

@@ -15,19 +15,21 @@
 		<div class="container-fluid">
 			<div class="row">
 				<div class="col-md-6 offset-3">
-					<img class="d-block mx-auto" src="<?php echo wp_get_attachment_image_url('21', 'full'); ?>" alt="">
+					<a href="<?php echo esc_attr(home_url()); ?>">
+						<img class="d-block mx-auto" src="<?php echo wp_get_attachment_image_url('21', 'full'); ?>" alt="">
+					</a>
 					<nav>
 						<?php
 							wp_nav_menu(array(
 								'theme_location' 	=> 'menu-2', 
-								'menu_class'		=> 'd-flex justify-content-center flex-wrap text-capitalize'
+								'menu_class'		=> 'd-flex justify-content-center flex-wrap text-uppercase'
 							));
 						?>
 					</nav>
 					<ul class="social-icons d-flex justify-content-between mx-auto">
-						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/facebook.png" alt=""></a></li>
+						<li><a href="https://web.facebook.com/NewmanTactical"><img src="<?php echo get_template_directory_uri(); ?>/icons/facebook.png" alt=""></a></li>
 						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/twitter.png" alt=""></a></li>
-						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/instagram.png" alt=""></a></li>
+						<li><a href="https://www.instagram.com/newmantactical/"><img src="<?php echo get_template_directory_uri(); ?>/icons/instagram.png" alt=""></a></li>
 						<li><a href=""><img src="<?php echo get_template_directory_uri(); ?>/icons/tik-tok.png" alt=""></a></li>
 					</ul>
 				</div>
@@ -45,12 +47,12 @@
 						wp_nav_menu(array(
 							'theme_location'=> 'menu-3', 
 							'menu_id'		=> 'policies-menu',
-							'menu_class'	=> 'd-flex text-capitalize justify-content-around text-dark'
+							'menu_class'	=> 'd-flex text-capitalize small justify-content-center justify-content-between text-dark'
 						));
 					?>
 				</div>
 				<div class="col text-end">
-					<span>Built by <a target="_blank" href="https://edgarwanjala.co.ke">Edgar</a></span>
+					<span>Built by <a class="theme-color" target="_blank" href="https://edgarwanjala.co.ke">Edgar</a></span>
 				</div>
 			</div>
 		</div>

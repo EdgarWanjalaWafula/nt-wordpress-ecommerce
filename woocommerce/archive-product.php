@@ -15,9 +15,9 @@
  * @version 3.4.0
  */
 
-defined( 'ABSPATH' ) || exit;
+defined('ABSPATH') || exit;
 
-get_header( 'shop' );
+get_header('shop');
 
 /**
  * Hook: woocommerce_before_main_content.
@@ -26,47 +26,45 @@ get_header( 'shop' );
  * @hooked woocommerce_breadcrumb - 20
  * @hooked WC_Structured_Data::generate_website_data() - 30
  */
-do_action( 'woocommerce_before_main_content' );
+do_action('woocommerce_before_main_content');
 
 ?>
 <div class="woocommerce-products-header">
-	<?php 
+	<?php
 	/**
 	 * Hook: lulea_after_header
 	 *
 	 * @hooked custom_page_banner - 10
 	 */
-	do_action( 'lulea_after_header' );
-	
+	do_action('lulea_after_header');
+
 	/**
 	 * Hook: woocommerce_archive_description.
 	 *
 	 * @hooked woocommerce_taxonomy_archive_description - 10
 	 * @hooked woocommerce_product_archive_description - 10
 	 */
-	do_action( 'woocommerce_archive_description' );
+	do_action('woocommerce_archive_description');
 	?>
 </div>
 
 <div class="all-products position-relative">
 	<div class="product-sort-filter text-uppercase heading">
 		<div class="container-fluid">
-			<div class="row justify-content-between align-items-center">
-				<div class="col-lg-3">
-					<span class="d-flex align-items-center">filter <span class="material-symbols-sharp">
-tune
-</span></span>
+			<div class="row justify-content-between align-items-center text-uppercase">
+				<div class="col-lg-2">
+					<i data-target="shop-filter" title="Filter" class="bi bi-sliders"></i>
 				</div>
-				<div class="col-lg-6">
+				<div class="col-lg-7">
 					<div class="d-flex justify-content-between align-items-center">
-						<?php 
-							/**
-							 * Hook: lulea_filter_bar.
-							 *
-							 * @hooked woocommerce_catalog_ordering - 10
-							 * @hooked woocommerce_result_count - 10
-							 */
-							do_action( 'lulea_filter_bar' );
+						<?php
+						/**
+						 * Hook: lulea_filter_bar.
+						 *
+						 * @hooked woocommerce_catalog_ordering - 10
+						 * @hooked woocommerce_result_count - 10
+						 */
+						do_action('lulea_filter_bar');
 						?>
 					</div>
 				</div>
@@ -76,53 +74,63 @@ tune
 	<div class="product-loop">
 		<div class="container-fluid">
 			<div class="row">
+				<div id="shop-filter" class="filter-sidebar">
+					<?php
+					/**
+					 * Hook: woocommerce_sidebar.
+					 *
+					 * @hooked woocommerce_get_sidebar - 10
+					 */
+					do_action('woocommerce_sidebar');
+					?>
+				</div>
 				<div class="col p-0">
 					<?php
-						if ( woocommerce_product_loop() ) {
+					if (woocommerce_product_loop()) {
 
-							/**
-							 * Hook: woocommerce_before_shop_loop.
-							 *
-							 * @hooked woocommerce_output_all_notices - 10
-							 * @hooked woocommerce_result_count - 20
-							 * @hooked woocommerce_catalog_ordering - 30
-							 */
-							do_action( 'woocommerce_before_shop_loop' );
+						/**
+						 * Hook: woocommerce_before_shop_loop.
+						 *
+						 * @hooked woocommerce_output_all_notices - 10
+						 * @hooked woocommerce_result_count - 20
+						 * @hooked woocommerce_catalog_ordering - 30
+						 */
+						do_action('woocommerce_before_shop_loop');
 
-							woocommerce_product_loop_start();
+						woocommerce_product_loop_start();
 
-							$i = 0; 
+						$i = 0;
 
-							if ( wc_get_loop_prop( 'total' ) ) {
-								while ( have_posts() ) {
-									the_post();
-									$i++; 
+						if (wc_get_loop_prop('total')) {
+							while (have_posts()) {
+								the_post();
+								$i++;
 
-									/**
-									 * Hook: woocommerce_shop_loop.
-									 */
-									do_action( 'woocommerce_shop_loop' );
+								/**
+								 * Hook: woocommerce_shop_loop.
+								 */
+								do_action('woocommerce_shop_loop');
 
-									wc_get_template_part( 'content', 'product' );
-								}
+								wc_get_template_part('content', 'product');
 							}
-
-							woocommerce_product_loop_end();
-
-							/**
-							 * Hook: woocommerce_after_shop_loop.
-							 *
-							 * @hooked woocommerce_pagination - 10
-							 */
-							do_action( 'woocommerce_after_shop_loop' );
-						} else {
-							/**
-							 * Hook: woocommerce_no_products_found.
-							 *
-							 * @hooked wc_no_products_found - 10
-							 */
-							do_action( 'woocommerce_no_products_found' );
 						}
+
+						woocommerce_product_loop_end();
+
+						/**
+						 * Hook: woocommerce_after_shop_loop.
+						 *
+						 * @hooked woocommerce_pagination - 10
+						 */
+						do_action('woocommerce_after_shop_loop');
+					} else {
+						/**
+						 * Hook: woocommerce_no_products_found.
+						 *
+						 * @hooked wc_no_products_found - 10
+						 */
+						do_action('woocommerce_no_products_found');
+					}
 					?>
 				</div>
 			</div>
@@ -135,13 +143,6 @@ tune
  *
  * @hooked woocommerce_output_content_wrapper_end - 10 (outputs closing divs for the content)
  */
-do_action( 'woocommerce_after_main_content' );
+do_action('woocommerce_after_main_content');
 
-/**
- * Hook: woocommerce_sidebar.
- *
- * @hooked woocommerce_get_sidebar - 10
- */
-do_action( 'woocommerce_sidebar' );
-
-get_footer( 'shop' );
+get_footer('shop');

@@ -30,7 +30,6 @@
 	}
 
 	$items_count = WC()->cart->get_cart_contents_count();
-
 	?>
 	<div id="page" class="site">
 		<header id="masthead" class="site-header">
@@ -86,7 +85,7 @@
 									wp_reset_postdata();
 									?>
 									<li>
-										<a href="<?php echo esc_html(home_url('collections')); ?>">All collections <i class="bi bi-plus"></i></a>
+										<a class="d-block" href="<?php echo esc_html(home_url('collections')); ?>">All collections <i class="bi bi-plus"></i></a>
 									</li>
 								</ul>
 							</nav>
@@ -119,10 +118,14 @@
 			</div>
 		</header><!-- #masthead -->
 		<div class="announcement-div small text-center text-white">
-			<span class="d-block"><?php echo esc_html('Call Us: +254707718567'); ?></span>
+			<span class="d-block"><?php echo esc_html('Call Us: +254797411971'); ?></span>
 		</div>
 
 		<?php
 		get_template_part('template-parts/content', 'menu-panel'); // mobile menu panel
 		get_template_part('template-parts/content', 'search-panel'); // search menu panel
+
+		if(is_page('home')){
+			get_template_part('template-parts/content', 'newsletter-modal'); // show modal only on the homepage
+		}
 		?>

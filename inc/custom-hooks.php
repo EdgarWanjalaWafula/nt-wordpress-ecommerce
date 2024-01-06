@@ -17,9 +17,12 @@ add_action('lulea_after_header', 'custom_page_banner');
 add_action('wp_ajax_data_fetch', 'data_fetch');
 add_action('wp_ajax_nopriv_data_fetch', 'data_fetch');
 add_action('woocommerce_after_add_to_cart_button', 'newman_checkout_btn');
-add_action('woocommerce_before_add_to_cart_quantity', 'newman_add_shoe_size');
+add_action('woocommerce_before_add_to_cart_quantity', 'newman_add_shoe_size', 1);
+add_action('woocommerce_before_add_to_cart_quantity', 'opening_flex_divs', 2);
 add_action('woocommerce_product_options_general_product_data', 'newman_add_shoe_sizes');
 add_action('woocommerce_process_product_meta', 'newman_save_product_meta');
+add_action('woocommerce_before_shop_loop_item_title', 'newman_gallery_image');
+add_action('newman_page_header_breadcrumb', 'woocommerce_breadcrumb');
 
 add_filter('woocommerce_single_product_image_zoom_enabled', '__return_false');
 add_filter('single_product_archive_thumbnail_size', function ($size) {
@@ -41,9 +44,9 @@ function data_fetch()
 
     $the_query = new WP_Query(
         array(
-            'posts_per_page' => 5,
-            's' => esc_attr($_POST['keyword']),
-            'post_type' => 'product'
+            'posts_per_page'    => 5,
+            's'                 => esc_attr($_POST['keyword']),
+            'post_type'         => 'product'
         )
     );
 
@@ -73,20 +76,11 @@ function data_fetch()
 function custom_page_banner()
 {
     /**
-     * Show custom page banner on shop page only. 
+     * Show custom page banner.
      * @return void
      */
-    ?>
-        <div class="page-banner position-relative">
-            <div class="container-fluid">
-                <div class="row">
-                    <div class="col">
-                        <img src="<?php echo wp_get_attachment_image_url('261', 'banner-image'); ?>" alt="Newman Tacticals">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <?php
+
+    get_template_part('template-parts/content', 'page-header');
 }
 
 function newman_add_shoe_sizes()
@@ -146,8 +140,11 @@ function newman_add_shoe_size()
             echo '<li data-size="' . $size . '">' . $size . '</li>';
         endforeach;
         echo '</ul></div>';
-        echo '<div class="d-flex align-items-center quantity-cart">';
     endif;
+}
+
+function opening_flex_divs(){
+    echo '<div class="d-flex align-items-center quantity-cart">';
 }
 
 function add_shoe_size_to_cart($cart_item_data, $product_id)
@@ -190,4 +187,18 @@ function shoe_size_line_item_meta($item, $cart_item_key, $values, $order)
 function add_flex_div()
 {
     var_dump("sds");
+}
+
+function newman_gallery_image()
+{
+    /**
+     * Hook first image from the gallery after product thumbnail and show it on hover. 
+     * @param $attachment_ids[0]
+     */
+    global $product;
+    $attachment_ids = $product->get_gallery_image_ids();
+
+    if (!empty($attachment_ids)):
+        echo '<img class="product-hover-image position-absolute w-100" src="' . wp_get_attachment_image_url($attachment_ids[0], 'product-thumbnail') . '" />';
+    endif;
 }
